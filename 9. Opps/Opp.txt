@@ -1,0 +1,1561 @@
+-------------------------------------------------------------Python OOP(s)-----------------------------------------------------=-----------------------------------
+
+---Topic of python---
+---Details with an examples----
+
+
+
+# Object Oriented Programming Concept (oop)::::::::
+
+
+-------------Classes and Instances----------------
+
+1. how to create class
+2. how to define class
+3. what is object and how it's define
+4. what is instances and how it's define
+
+a. defination of class:
+	
+	A class is a code template for creating objects. Objects have member variables and have behaviour associated with them. 
+	In python a class is created by the keyword class . An object is created using the constructor of the class.
+
+b. defination of instances:
+
+	Instance is synonymous to object. Objects are instances of types. So, "23 is an instance of the type int". 
+	Instance and object are usually used interchangeably.
+
+		
+
+
+
+
+eg-01::::::::::::::::::::::::::::::::::::
+
+class employee:          
+    pass		 
+			 
+emp_1 = employee()
+emp_2 = employee()
+
+
+print(emp_1)
+print(emp_2)
+
+
+o/p: 
+
+<__main__.employee object at 0x0094E6A0>
+<__main__.employee object at 0x0094EBF8>
+
+both are the object at different memory locations
+
+
+eg-02::::::::::::::::::::::::::::::::::::::::::::
+
+class employee:
+    pass
+
+emp_1 = employee()		-------------------->	 // emp_1, emp_2 are the instances
+emp_2 = employee()
+
+emp_1.first = 'Dibyendu' 		------------>	 // Instances variables                
+emp_1.last = 'Biswas'			------------>	 // Instances variables
+emp_1.email = 'dibyendu.biswas@company.com'--------->	 // Instances variables
+emp_1.pay = 50000		       ------------->	 // Instances variables
+
+emp_2.first = 'Test'		-------------------->	// Instances variables
+emp_2.last = 'User'		-------------------->	// Instances variables
+emp_2.email = 'test.user@company.com'	------------>	// Instances variables
+emp_2.pay = 60000		-------------------->	// Instances variables
+
+print(emp_1.email)
+print(emp_2.email)
+
+o/p:
+
+dibyendu.biswas@company.com
+test.user@company.com
+
+
+above example, it have lot of codes and it's becomes to show error
+	       so, we use _ _init_ _ method
+
+
+eg-03::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::(_ _init_ _ method):::::
+
+
+_ _init_ _ method: "__init__" is a reseved method in python classes. It is called as a constructor in object oriented terminology. 
+                    This method is called when an object is created from a class and it allows the class to                    
+                    initialize the attributes of the class.
+
+
+Self: The word 'self' is used to represent the instance of a class. By using the "self" keyword we access the attributes        
+      and methods of the class in python.
+
+
+
+
+eg:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+class student:
+    def __init__(self, fname, lname):
+        self.fname = fname
+        self.lname = lname
+        self.email = fname.lower() + "." +lname.lower() + '@gmail.com'
+    def subject(self):
+        print('Math, Physics, Computer')
+
+std1 = student('Arko', 'Biswas')
+std2 = student('Dibyendu', 'Biswas')
+
+std1.subject()
+
+
+
+o/p:----
+
+Math, Physics, Computer
+
+
+
+eg:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+class student:
+    def __init__(self, fname, lname):
+        self.fname = fname
+        self.lname = lname
+        self.email = fname.lower() + "." +lname.lower() + '@gmail.com'
+    def name(self):
+        print('Student Name is: ', self.fname, self.lname)
+
+std1 = student('Arko', 'Biswas')
+std2 = student('Dibyendu', 'Biswas')
+
+std1.name()
+std2.name()
+
+
+
+o/p:--------
+
+Student Name is:  Arko Biswas
+Student Name is:  Dibyendu Biswas
+
+
+eg:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+class student:
+    def __init__(self, fname, lname, age):
+        self.fname = fname
+        self.lname = lname
+        self.age = age
+        self.email = fname.lower() + "." +lname.lower() + '@gmail.com'
+    def name1(self):
+        print('My name is: ', self.fname, self.lname)
+        print("My age is: ", self.age)				// self is indicate to which object (std1/std2)
+
+    def name(self):
+        self.age = 27
+        print('Student Name is: ', self.fname, self.lname)
+        print('My age is: ', self.age)
+
+std1 = student('Arko', 'Biswas', 22)
+std2 = student('Dibyendu', 'Biswas', 21)
+
+#print(std1.fname, std1.lname)
+
+std1.name1()
+print()
+std2.name()
+
+
+
+o/p:---------------
+
+
+My name is:  Arko Biswas
+My age is:  22
+
+Student Name is:  Dibyendu Biswas
+My age is:  27
+
+eg:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+comparing two object and check they are same (value/values not memory allocation)
+
+process--1
+
+
+class student:
+    def __init__(self, fname, lname, age):
+        self.fname = fname
+        self.lname = lname
+        self.age = age
+        self.email = fname.lower() + "." +lname.lower() + '@gmail.com'
+    def name1(self):
+        print('My name is: ', self.fname, self.lname)
+        print("My age is: ", self.age)
+
+    def name(self):
+        self.age = 27
+        print('Student Name is: ', self.fname, self.lname)
+        print('My age is: ', self.age)
+
+
+
+std1 = student('Arko', 'Biswas', 22)
+std2 = student('Dibyendu', 'Biswas', 21)
+
+std1.name1()
+print()
+std2.name()
+
+#comparing two objects both are same or not
+
+if std1 == std2:
+    print('Both are same values')
+else:
+    print("this two objects are not same")
+
+
+o/p------->
+
+My name is:  Arko Biswas
+My age is:  22
+
+Student Name is:  Dibyendu Biswas
+My age is:  27
+this two objects are not same               // becz of both of age value is not same
+
+
+
+process-----2
+
+
+class student:
+    def __init__(self, fname, lname, age):
+        self.fname = fname
+        self.lname = lname
+        self.age = age
+        self.email = fname.lower() + "." +lname.lower() + '@gmail.com'
+    def name1(self):
+        print('My name is: ', self.fname, self.lname)
+        print("My age is: ", self.age)
+
+    def name(self):
+        self.age = 27
+        print('Student Name is: ', self.fname, self.lname)
+        print('My age is: ', self.age)
+
+    def compare(self, other):
+        if self.age == other.age:
+            return True
+        else:
+            False
+
+
+std1 = student('Arko', 'Biswas', 22)
+std2 = student('Dibyendu', 'Biswas', 21)
+
+#print(std1.fname, std1.lname)
+
+std1.name1()
+print()
+std2.name()
+
+if std1.compare(std2):
+    print('Both are same values')
+else:
+    print("this two objects are not same")
+
+
+
+o/p------>
+
+
+My name is:  Arko Biswas
+My age is:  22
+
+Student Name is:  Dibyendu Biswas
+My age is:  27
+this two objects are not same               // becz of both of age value is not same
+
+
+
+eg:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+class employee:
+    def __init__(self,frist,last,pay):
+        self.frist = frist
+        self.last = last
+        self.pay = pay
+        self.email = frist.lower() + '.' + last.lower() + '@company.com'
+
+emp_1 = employee('Dibyendu','Biswas','50000')
+emp_2 = employee('Test','User','60000')
+
+
+
+print(emp_1.email)
+print(emp_2.email)
+
+print('{} {}'.format(emp_1.frist, emp_1.last))  //using formatted string for printing name
+
+print(emp_1.__dict__)
+
+
+o/p:-
+
+dibyendu.biswas@company.com
+test.user@company.com
+
+Dibyendu Biswas
+
+{'frist': 'Dibyendu', 'last': 'Biswas', 'pay': '50000', 'email': 'dibyendu.biswas@company.com'}
+
+
+eg-04::::::::::::::::::::::::::::::::::::::
+
+
+class employee:
+    def __init__(self,frist,last,pay):
+        self.frist = frist
+        self.last = last
+        self.pay = pay
+        self.email = frist.lower() + '.' + last.lower() + '@company.com'
+
+    def fullname(self):
+        return '{} {}'.format(self.frist,self.last)
+
+emp_1 = employee('Dibyendu','Biswas','50000')
+emp_2 = employee('Test','User','60000')
+
+print(emp_1.email)
+print(emp_2.email)
+
+print(emp_1.fullname())
+
+
+o/p:----
+
+dibyendu.biswas@company.com
+test.user@company.com
+
+Dibyendu Biswas
+
+
+eg-05:::::::::::::::::::::::::::::::::::::::
+
+
+class employee:
+    def __init__(self,frist,last,pay):
+        self.frist = frist
+        self.last = last
+        self.pay = pay
+        self.email = frist.lower() + '.' + last.lower() + '@company.com'
+
+    def fullname(self):
+        return '{} {}'.format(self.frist,self.last)
+
+emp_1 = employee('Dibyendu','Biswas','50000')
+emp_2 = employee('Test','User','60000')
+
+
+emp_1.fullname()
+print(employee.fullname(emp_1))
+
+
+o/p:----
+
+
+Dibyendu Biswas
+
+
+eg-06::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+class employee:
+    def __init__(self,frist,last,pay):
+        self.frist = frist
+        self.last = last
+        self.pay = pay
+        self.email = frist.lower() + '.' + last.lower() + '@company.com'
+
+    def fullname():                                   // we not define self, so it's becomes error
+        return '{} {}'.format(self.frist,self.last)
+
+emp_1 = employee('Dibyendu','Biswas','50000')
+emp_2 = employee('Test','User','60000')
+
+print(emp_1.email)
+print(emp_2.email)
+
+print(emp_1.fullname())
+
+
+o/p:------
+
+
+Traceback (most recent call last):
+  File "E:/Dibyendu/PYTHON/pra/nw.py", line 18, in <module>
+    print(emp_1.fullname())
+TypeError: fullname() takes 0 positional arguments but 1 was given
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Variables are two type: 
+	
+	1. Class Variables: If you change one class variables then it change the all the objects of this class.
+			    
+
+	2. Object/ Instance Variables: If you change one object variables then it can't do any changes of the class or
+				       other objects/ instances.
+
+
+eg. of Object/ Instance Variables:
+
+
+
+class student:
+
+    def __init__(self, fname, lname):
+        self.fname = fname
+        self.lname = lname
+        self.fees = 20000
+
+
+std1 = student('Dibyendu', 'Biswas')
+std2 = student('Shyam', 'Sharma')
+std1.fees = 30000
+print(std1.__dict__)
+print()
+print(std2.__dict__)
+
+
+o/p:----->
+
+
+{'fname': 'Dibyendu', 'lname': 'Biswas', 'fees': 30000}
+							 // here only one object is changed but another is not change
+{'fname': 'Shyam', 'lname': 'Sharma', 'fees': 20000}
+
+
+
+eg. of Class Variables:
+
+
+class student:
+    fees = 20000
+    def __init__(self, fname, lname):
+        self.fname = fname
+        self.lname = lname
+
+
+
+std1 = student('Dibyendu', 'Biswas')
+std2 = student('Shyam', 'Sharma')
+
+student.fees = 45000	// when I use this, then change all the instances. 
+
+print('Name: ',std1.fname, std1.lname, '&  Fees:',std1.fees)
+print()
+print('Name: ',std2.fname, std2.lname, '&  Fees:',std2.fees)
+
+
+o/p:---------->
+
+
+Name:  Dibyendu Biswas &  Fees: 45000
+
+Name:  Shyam Sharma &  Fees: 45000
+
+
+
+
+
+
+
+
+
+class Rectangle:
+   def __init__(self, length, breadth, unit_cost=0):
+       self.length = length
+       self.breadth = breadth
+       self.unit_cost = unit_cost
+   def get_area(self):
+       return self.length * self.breadth
+   def calculate_cost(self):
+       area = self.get_area()
+       return area * self.unit_cost
+
+					
+r = Rectangle(160, 120, 2000)		# breadth = 120 units, length = 160 units, 1 sq unit cost = Rs 2000
+
+print("Area of Rectangle: %s sq units" % (r.get_area()))
+
+
+
+o/p:---
+
+Area of Rectangle: 19200 sq units
+Cost of rectangular field: Rs.38400000
+
+
+
+
+eg-07::::::::::::::::::::::::::::::::::::::::::::::::::::
+				
+
+class student:
+    perc_rise = 1.05
+
+    def __init__(self, first, last, marks):
+        self.first = first
+        self.last  = last
+        self.marks = marks
+
+    def apply_raise(self):
+        self.marks = int(self.marks * 1.05)
+
+std_1 = student('Dibyendu', 'Biswas', 60)
+std_2 = student('Arko', 'Paul', 90)
+
+print(std_1.marks)
+std_1.apply_raise()
+print(std_1.marks)
+
+
+
+o/p:-------
+
+60
+63  // increase the percentage (5%)
+
+
+
+eg-08::::::::::::::::::::::::::::::::::::::::::::::::::::		
+
+
+
+class student:
+    perc_rise = 1.05
+
+    def __init__(self, first, last, marks):
+        self.first = first
+        self.last  = last
+        self.marks = marks
+
+    def apply_raise(self):
+        self.marks = int(self.marks * 1.05)
+
+std_1 = student('Dibyendu', 'Biswas', 60)
+std_2 = student('Arko', 'Paul', 90)
+
+print(std_1.__dict__)
+std_1.apply_raise()
+print(std_1.__dict__)
+
+
+
+o/p:-------
+
+
+{'first': 'Dibyendu', 'last': 'Biswas', 'marks': 60}
+{'first': 'Dibyendu', 'last': 'Biswas', 'marks': 63}  // increase the percentage (5%)
+
+
+
+eg::::::::::::::::::::::::::::::::::::::::::::::::::::	
+
+
+
+--------Methods----------
+
+Three types:
+
+	1. Instance Methods
+
+		i)  Accessor Method (when you are fetching the value
+        	ii) Mutators Method
+
+	2. Class Methods
+	3. Static Methods
+
+
+
+
+1. Instance Method:::
+
+
+
+
+eg::::::::::::
+
+
+
+class student:
+    school = 'Siliguri'
+    def __init__(self,m1, m2, m3):
+        self.m1 = m1
+        self.m2 = m2
+        self.m3 = m3
+    def display(self):
+        print('My 1st marks is: ', self.m1)
+        print('My 2st marks is: ', self.m2)
+        print('My 3st marks is: ', self.m3)
+    def ave(self):
+        return (self.m1 + self.m2 + self.m3) / 3
+
+std1 = student(20, 40, 50)
+std2 = student(60,75,90)
+std1.display()
+print('\naverage value is: ',std1.ave())
+
+
+eg::::::
+
+
+
+class student:
+    school = 'Siliguri'
+    def __init__(self,m1, m2, m3):
+        self.m1 = m1
+        self.m2 = m2
+        self.m3 = m3
+    def display(self):
+        print('My 1st marks is: ', self.m1)
+        print('My 2st marks is: ', self.m2)
+        print('My 3st marks is: ', self.m3)
+    def ave(self):
+        return (self.m1 + self.m2 + self.m3) / 3
+
+    def get_m1(self):		// accessor, use to get the value
+        return self.m1
+
+    def set_m1(self, value):	// mutators, use for set the value
+        self.m1 = value
+
+std1 = student(20, 40, 50)
+std2 = student(60,75,90)
+std1.display()
+print(std1.get_m1())	------------>	// accessor, use to get the value
+print(std1.set_m1(value=2500))------>	// mutators, use for set the value
+
+
+
+2. Class Methods
+
+
+eg::::::::::
+
+
+class student:
+    school = 'Siliguri Baradakanta Vidyapith'
+    def __init__(self,m1, m2, m3):
+        self.m1 = m1
+        self.m2 = m2
+        self.m3 = m3
+    def display(self):
+        print('My 1st marks is: ', self.m1)
+        print('My 2st marks is: ', self.m2)
+        print('My 3st marks is: ', self.m3)
+    def ave(self):
+        return (self.m1 + self.m2 + self.m3) / 3
+
+    @classmethod  -----------------------------------> // Calling class method (decorateros)
+    def info(cls):-----------------------------------> // Class Method
+        return cls.school ---------------------------> // class variables
+
+
+std1 = student(20, 40, 50)
+print(student.info()) -------------------------------> // printing class method
+
+
+
+
+3. Static Method::::::
+
+
+
+eg:::::::::::::::
+
+
+
+class student:
+    school = 'Siliguri Baradakanta Vidyapith'
+    def __init__(self,m1, m2, m3):
+        self.m1 = m1
+        self.m2 = m2
+        self.m3 = m3
+    def display(self):
+        print('My 1st marks is: ', self.m1)
+        print('My 2st marks is: ', self.m2)
+        print('My 3st marks is: ', self.m3)
+    def ave(self):
+        return (self.m1 + self.m2 + self.m3) / 3
+
+    @staticmethod   -------------------------------------->  //Static Method				
+    def info():
+        print("Hey, I am Dibyendu Biswas")
+
+
+std1 = student(20, 40, 50)
+std1.info()  --------------------------------------------->  // Calling static method
+
+
+
+o/p:--------->
+
+Hey, I am Dibyendu Biswas
+
+
+
+
+
+
+
+-----------------------------------------------Class Inheritances---------------------------------------------------
+
+
+eg-01::::::::::::::::::::::::::::::::::::::::::::::::::::	
+
+
+class student:
+    
+    def __init__(self, first, last, marks):
+        self.first = first
+        self.last  = last
+        self.marks = marks
+
+   
+
+class dumb(student):	-----------------> // Class within a class (class inheritance)
+    pass
+
+std_1 = dumb('Dibyendu', 'Biswas', 60)
+
+print(std_1.__dict__)
+
+
+
+o/p------>
+
+
+{'first': 'Dibyendu', 'last': 'Biswas', 'marks': 60}
+
+
+
+eg-02::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
+
+class student:   ------------------------------------------->  // Outer Class
+
+    def __init__(self, name, roll):
+        self.name = name
+        self.roll = roll
+        self.lap = self.LAPTOP()  -------------------------> // using this function we can call inner class
+
+    def show(self):        -------------------------------> // this show method use for showing/ calling outer class
+        print(self.name, self.roll)
+        self.lap.show()
+
+    class LAPTOP:   --------------------------------------->  // Inner Class
+
+        def __init__(self):
+            self.brand = 'HP'
+            self.cpu = 'i7th'
+            self.ram = '16gb'
+
+        def show(self):   -------------------------------->  // this show method use for showing/ calling inner class
+            print(self.brand, self.cpu, self.ram)
+
+
+s1 = student('Dibyendu', 22)
+s2 = student('Shyam', '23B')
+
+s1.show()                   ----------------------------> // calling both outer class and inner class 
+
+
+
+o/p:-------->
+
+
+Dibyendu 22
+HP i7th 16gb
+
+
+
+eg-03::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+# 1. Single-level inheritance:
+
+	---------
+	|   A	|          Super/ Parent Class
+	---------
+	    ^
+	    |
+	    |
+	---------
+	|   B	|	 Child/ Sub Class
+	---------
+
+
+class A:     -------------------------------------> Parent Class/ Super Class
+    def features1(self):
+        print("Features-1 is working")
+    def features2(self):
+        print("Features-2 is working")
+
+class B(A):    ----------------------------------> Child Class/ Sub Class
+    def features3(self):
+        print("Features-3 is working")
+    def features4(self):
+        print("Features-4 is working")
+
+
+b1 = B()
+
+b1.features1()
+b1.features2()
+b1.features3()
+b1.features4()
+
+
+o/p:---------->
+
+
+Features-1 is working
+Features-2 is working
+Features-3 is working
+Features-4 is working
+
+
+
+eg-04::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+# 2. Multi-level inheritance
+
+
+	---------
+	|   A	|          Super/ Parent Class
+	---------
+	    ^
+	    |
+	    |
+	---------
+	|   B	|	 Child/ Sub Class (it's also parent class of C)
+	---------
+	    ^
+	    |
+	    |
+	---------
+	|   C	|	 Child/ Sub Class
+	---------
+
+
+
+class A:                #---------------------> Parent Class/ Super Class
+    def features1(self):
+        print("Features-1 is working")
+    def features2(self):
+        print("Features-2 is working")
+
+class B(A):         #-------------------------> Child Class/ Sub Class
+    def features3(self):
+        print("Features-3 is working")
+    def features4(self):
+        print("Features-4 is working")
+class C(B):
+    def features5(self):
+        print("Features-5 is working")
+
+c1 = C()
+
+c1.features1()
+c1.features2()
+c1.features3()
+c1.features4()
+c1.features5()
+
+
+
+o/p:----------->
+
+
+Features-1 is working
+Features-2 is working
+Features-3 is working
+Features-4 is working
+Features-5 is working
+
+
+
+eg-05::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+# 3. Multiple inheritance
+
+
+	---------       ---------
+	|   A	|       |   B   |         // Super Class
+	---------       --------- 
+	   ^               ^    
+	   \              /
+	    \            /
+	     \          / 
+              \        /
+
+	       ----------
+	       |   C	|		// Sub Class
+	       ----------	
+
+
+class A:                #---------------------> Parent Class/ Super Class
+    def features1(self):
+        print("Features-1 is working")
+    def features2(self):
+        print("Features-2 is working")
+
+class B:         #-------------------------> Parent Class/ Super Class
+    def features3(self):
+        print("Features-3 is working")
+    def features4(self):
+        print("Features-4 is working")
+
+class C(A,B):	 #-------------------------> Child Class/ Sub Class
+    def features5(self):
+        print("Features-5 is working")
+
+c1 = C()
+
+c1.features1()
+c1.features2()
+c1.features3()
+c1.features4()
+c1.features5()
+
+
+
+o/p:----------->
+
+
+Features-1 is working
+Features-2 is working
+Features-3 is working
+Features-4 is working
+Features-5 is working
+
+
+
+
+-------------Constructor in Inheritance------------
+
+
+
+#1. Single-level inheritance Constructor:
+
+
+
+class A:  --------------------------------------------------> Parent Class/ Super Class
+    def __init__(self):
+        print("In A init.")
+
+    def features1(self):
+        print("Features-1 is working")
+
+    def features2(self):
+        print("Features-2 is working")
+
+class B(A):  --------------------------------------------------> Child Class/ Sub Class       
+
+    def features3(self):
+        print("Features-3 is working")
+
+    def features4(self):
+        print("Features-4 is working")
+
+
+a1 = A()  ------------------------------------> Calling class A, and then printing the init method.
+
+
+
+o/p:------>
+
+
+In A init.
+
+----------------------------------------------
+# 1.a. Single-level inheritance Constructor:---------
+----------------------------------------------
+
+class A:                #---------------------> Parent Class/ Super Class
+
+    def __init__(self):
+        print("In A init.")
+
+    def features1(self):
+        print("Features-1 is working")
+
+    def features2(self):
+        print("Features-2 is working")
+
+class B(A):         #-------------------------> Child Class/ Sub Class
+
+    def features3(self):
+        print("Features-3 is working")		// in B class, there has no init method so it goes to class 'A' and finding
+						   the init method. if init method is present then it printing (if calling)
+    def features4(self):
+        print("Features-4 is working")
+
+
+a1 = B()         #------------> Calling class B, and then printing the init method.
+
+
+o/p:------>
+
+
+In A init.
+
+
+
+
+----------------------------------------------
+# 1.b. Single-level inheritance Constructor:---------
+----------------------------------------------
+
+
+
+class A:                #---------------------> Parent Class/ Super Class
+    def __init__(self):
+        print("In A init.")
+
+    def features1(self):
+        print("Features-1 is working")
+
+    def features2(self):
+        print("Features-2 is working")
+
+class B(A):         #-------------------------> Child Class/ Sub Class
+
+    def __init__(self):
+        print("In B init")
+
+    def features3(self):
+        print("Features-3 is working")
+
+    def features4(self):
+        print("Features-4 is working")
+
+
+a1 = B()        #------------> Calling class B, and then printing the init method.
+
+
+o/p:------>
+
+ 			// class B finding the own init method, so it's print own init method.
+
+In B init.
+
+
+
+
+----------------------------------------------
+# 1.c. Single-level inheritance Constructor:---------
+----------------------------------------------
+
+
+class A:                #---------------------> Parent Class/ Super Class
+    def __init__(self):
+        print("In A init.")
+
+    def features1(self):
+        print("Features-1 is working")
+
+    def features2(self):
+        print("Features-2 is working")
+
+class B(A):         #-------------------------> Child Class/ Sub Class
+
+    def __init__(self):
+        super(B, self).__init__()   -------------> using super we can call any method of parent/super class (class A)
+        print("In B init")
+
+    def features3(self):
+        print("Features-3 is working")
+
+    def features4(self):
+        print("Features-4 is working")
+
+
+a1 = B()         
+
+
+
+o/p:------>
+
+ 			// class B finding the own init method and find class 'A' init method, so it's print both (class A and 
+			   Class B) init method.
+	
+In A init.
+In B init.
+
+
+
+
+# 2. Multiple inheritance Constructor:
+
+
+
+
+class A:                #---------------------> Parent Class/ Super Class
+    def __init__(self):
+        print("In A init.")
+
+    def features1(self):
+        print("Features-1 is working")
+
+    def features2(self):
+        print("Features-2 is working")
+
+class B:         #-------------------------> Parent Class/ Super Class
+
+    def __init__(self):
+        print("In B init")
+
+    def features3(self):
+        print("Features-3 is working")
+
+    def features4(self):
+        print("Features-4 is working")
+
+class C(A,B):	  #-------------------------> Child Class/ Sub Class
+
+    def __init__(self):
+        print("In C init.")
+
+    def features5(self):
+        print("Features-5 is working")
+
+a1 = C()
+
+o/p:------>
+			// In C class, sub class can't find or pointing parent's class init method, so it's printing it's own
+			   init method.
+
+In C init.
+
+
+
+
+----------------------------------------------
+# 2.a. Multiple inheritance Constructor:---------
+----------------------------------------------
+
+
+class A:                #---------------------> Parent Class/ Super Class
+    def __init__(self):
+        print("In A init.")
+
+    def features1(self):
+        print("Features-1 is working")
+
+    def features2(self):
+        print("Features-2 is working")
+
+class B:        #------------------------------> Parent Class/ Super Class
+
+    def __init__(self):
+        print("In B init")
+
+    def features3(self):
+        print("Features-3 is working")
+
+    def features4(self):
+        print("Features-4 is working")
+
+class C(A,B):      #----------------------------------> Child Class/ Sub Class
+
+    def __init__(self):
+        super(C, self).__init__()
+        print("In C init.")
+
+    def features5(self):
+        print("Features-5 is working")
+
+
+a1 = C()
+
+
+o/p:-------->
+
+			// In C class, fristly it's print it's own init method (In C init) and then find the next one (finding
+			   left to right (class C(A,B), where left pointing class A and right pointing class B)), so printing
+			   like this. It's Called MRO (method resolution order)
+In A init.
+In C init.
+
+
+
+--------------------------------------------------------------
+# 2.a. Multiple inheritance Constructor (using super function):---------
+--------------------------------------------------------------
+
+
+
+
+
+class A:                #---------------------> Parent Class/ Super Class
+
+    def features1(self):
+        print("Features-1 is working")
+
+    def features2(self):
+        print("Features-2 is working")
+
+class B:         
+
+
+    def features3(self):
+        print("Features-3 is working")
+
+    def features4(self):
+        print("Features-4 is working")
+
+class C(A,B):
+
+    def feat(self):
+        super(C, self).features2()
+
+    def features5(self):
+        print("Features-5 is working")
+
+
+a1 = C()
+a1.feat()
+
+
+o/p:--------->
+
+
+Features-2 is working
+
+
+
+
+
+-----------------------------------------------Polymorphism---------------------------------------------------
+
+
+
+
+Type:
+  
+  1. Duck Typing
+  2. Operator Overloading
+  3. Method Overloading
+  4. Method Overriding
+
+
+
+1. Duck Typing:
+
+
+	Duck Test:  If it look like a duck, swims like a duck, and quack like a duck,
+		    then it probably is a duck.
+
+
+eg-01::::::::::::::::::
+
+
+class pycharm:
+
+    def execute(self):
+        print('Compiling')
+        print('Running')
+
+class Laptop:
+
+    def code(self, ide):
+        ide.execute()
+
+ide = pycharm()
+lap1 = Laptop()
+lap1.code(ide)
+
+
+o/p:------->
+
+Compoling
+Running
+
+
+eg-02::::::::::::::::::
+
+
+
+class pycharm:
+
+    def execute(self):
+        print('Compiling')
+        print('Running')
+
+class MyEditor:
+
+    def execute(self):
+        print('Spell Check')
+        print('Convention Check')
+        print('Compiling')
+        print('Running')
+
+class Laptop:
+
+    def code(self, ide):
+        ide.execute()
+
+ide = MyEditor()
+lap1 = Laptop()
+lap1.code(ide)
+
+
+o/p:-------->
+
+Spell Check
+Convention Check
+Compiling
+Running
+
+
+
+
+ 2. Operator Overloading:
+
+
+
+a = '5'
+b = '9'
+
+#print(a+b)
+
+print(str.__add__(a,b))-------------> 59 //string concatenation
+
+
+we hava different method for different operators.
+
+eg::::
+
+_ _ add()_ _  ------------> for addition
+
+_ _ sub()_ _  ------------> for subtraction
+
+_ _ mul()_ _  ------------> for multiplication
+
+
+
+operator overloading:-
+---------------------
+
+eg-01::::::::::
+
+
+
+class student:
+
+    def __init__(self,m1,m2):
+        self.m1 = m1
+        self.m2 = m2
+
+
+s1 = student(58,69)
+s2 = student(60,65)
+
+s3 = s1 + s2	
+print(s3)	------------> // it's impossible to add two objects/ methods without define anything.
+
+output:--->
+
+Error.
+
+----------------------
+
+[] solve the above problem, we can do like this-----(showing below)
+
+
+class student:
+
+    def __init__(self,m1,m2):
+        self.m1 = m1
+        self.m2 = m2
+
+    def __add__(self, other):    ---------------> // it's a add method for adding two integer.
+        m1 = self.m1 + other.m1	-------------->  // self assign to s1 object and 'other' assign to s2 object.
+        m2 = self.m2 + other.m2
+        s3 = student(m1, m2)
+        return s3
+
+
+s1 = student(58,69)
+s2 = student(60,65)
+
+s3 = s1 + s2
+print(s3.m1)	--------------------> // student._ _add_ _(s1,s2), where s1 assign to 'self' and s2 assign to 'other'.
+
+
+o/p:--------->
+
+118.	----------------> // we add 58 from s1 (s1.m1) and 60 from s2 (s2.m2). 
+
+
+
+
+eg-02::::::::::
+
+
+
+
+class student:
+
+    def __init__(self,m1,m2):
+        self.m1 = m1
+        self.m2 = m2
+
+
+s1 = student(58,69)
+s2 = student(60,65)
+
+s3 = s1 + s2
+
+if s1>s2:
+   print("s1 wins")      // both the object can't compare without defining any method, so it's show error.
+
+else:
+   print("s2 wins")	// both the object can't compare without defining any method, so it's show error.
+
+
+
+output:-----
+
+Error.
+
+
+
+[] solve the above problem, we can do like this-----(showing below)
+
+
+
+class student:
+
+    def __init__(self,m1,m2):
+        self.m1 = m1
+        self.m2 = m2
+
+   
+    def __gt__(self, other):
+        r1 = self.m1 + other.m2 -----------------------> r1 and r2 are simple variables
+        r2 = self.m1 + other.m2
+        if r1>r2:
+            return True
+        else:
+            return False
+
+
+
+s1 = student(58,50)
+s2 = student(60,65)
+
+if s1>s2:	-------------->  // for s1 (m1+m1 = 58+50 = 108)
+    print("s1 wins")
+else:		-------------->  // for s1 (m1+m1 = 60+65 = 125)
+    print("s2 wins")
+
+
+o/p:-------->
+
+
+s2 wins
+
+
+
+
+
+
+3. Method Overloading:
+
+
+eg-01::::::::::
+
+
+class student:
+
+    def __init__(self,m1,m2):
+        self.m1 = m1
+        self.m2 = m2
+
+    def sum(self, a=None, b=None, c=None):
+        s = 0
+        if a!=None and b!= None and c!=None:
+            s = a+b+c
+        elif a!=None and b!=None:
+            s = a+b
+        else:
+            s = a
+
+        return s
+
+
+
+s1 = student(58,50)
+
+print(s1.sum(10,20,30)) #--------------> 60
+print(s1.sum(10,20))  #----------------> 30
+print(s1.sum(10))   #------------------> 10
+
+
+
+
+
+
+
+4. Method Overriding:
+
+
+
+class A:
+   
+   def show(self):
+	print("in A show")
+
+class B(A):
+
+   pass
+
+
+a1.B()
+a1.show()
+
+
+output:---------->
+
+
+in A show.
+
+
+
